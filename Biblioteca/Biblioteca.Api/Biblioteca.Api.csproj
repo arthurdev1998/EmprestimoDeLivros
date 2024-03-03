@@ -15,6 +15,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Biblioteca.Common\Biblioteca.Common.csproj" />
+    <ProjectReference Include="..\Biblioteca.Service\Biblioteca.Service.csproj" />
+    <ProjectReference Include="..\Biblioteca.Data.EntityFramework\Biblioteca.Data.EntityFramework.csproj" />
   </ItemGroup>
 
 </Project>

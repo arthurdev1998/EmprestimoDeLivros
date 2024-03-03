@@ -47,7 +47,7 @@ builder.Services.AddAuthentication(x =>
        {
             ValidateIssuer = true,
             ValidateAudience = true,
-            ValidateLifetime = true,
+            ValidateLifetime = true, // tempo que o token espirará
             ValidateIssuerSigningKey = true,
 
            

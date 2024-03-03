@@ -2,7 +2,6 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using Biblioteca.Common.Configuracoes.Usuarios;
 using Biblioteca.Data.EntityFramework.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -21,16 +20,28 @@ public class UsuarioRepository : IUsuarioRepository
         _configuration = configuration;
     }
 
+    public async Task<Usuario> AdicionarUsuario(Usuario usuario)
+    {
+        var usuarioIsExist = _context.Usuarios.Any(x => x.Email == usuario.Email);
+        if (usuarioIsExist)
+        {
+            throw new Exception("Usuario já existe");
+        }
+
+        await _context.AddAsync(usuario);
+        return usuario;
+    }
+
     public async Task<bool> AuthenticateAsync(string email, string senha)
     {
-        var usuario = await _context.Usuarios.FirstOrDefaultAsync(x => x.Email.Equals(email, StringComparison.CurrentCultureIgnoreCase));
+        var usuario = await _context.Usuarios.FirstOrDefaultAsync(x => x.Email!.Equals(email, StringComparison.CurrentCultureIgnoreCase));
         if (usuario == null)
             return false;
 
-        using var hmac = new HMACSHA256(usuario.PasswordSalt);
+        using var hmac = new HMACSHA512(usuario.PasswordSalt!);
         var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(senha));
 
-        if (!Enumerable.SequenceEqual(usuario.PasswordHash, computedHash))
+        if (!Enumerable.SequenceEqual(usuario.PasswordHash!, computedHash))
             return false;
 
         return true;
@@ -62,6 +73,25 @@ public class UsuarioRepository : IUsuarioRepository
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
 
+    public Task<IEnumerable<Usuario>> GetAllAsync(bool asNoTracking = false)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Usuario> GetByIdAsync(int id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task Remove(Usuario usuario)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task Update(Usuario usuario)
+    {
+        throw new NotImplementedException();
+    }
 
     public async Task<bool> UserExist(string email)
     {

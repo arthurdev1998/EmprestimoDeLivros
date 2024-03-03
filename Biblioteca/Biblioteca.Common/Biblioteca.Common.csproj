@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Biblioteca.Data.EntityFramework\Biblioteca.Data.EntityFramework.csproj" />
+  </ItemGroup>
+
 </Project>

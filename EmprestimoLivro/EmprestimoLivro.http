@@ -1,6 +1,0 @@
-@EmprestimoLivro_HostAddress = http://localhost:5056
-
-GET {{EmprestimoLivro_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

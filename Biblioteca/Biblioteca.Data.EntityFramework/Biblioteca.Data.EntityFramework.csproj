@@ -16,8 +16,9 @@
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.3.1" />
   </ItemGroup>
 
-  <ItemGroup>
+  <!-- <ItemGroup>
     <ProjectReference Include="..\Biblioteca.Common\Biblioteca.Common.csproj" />
-  </ItemGroup>
+    <ProjectReference Include="..\Biblioteca.Api\Biblioteca.Api.csproj" />
+  </ItemGroup> -->
 
 </Project>
